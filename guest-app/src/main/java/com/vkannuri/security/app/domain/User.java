@@ -1,4 +1,4 @@
-package com.vkannuri.security.app.auth;
+package com.vkannuri.security.app.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
