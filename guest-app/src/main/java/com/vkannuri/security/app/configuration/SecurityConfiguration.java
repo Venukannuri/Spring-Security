@@ -1,9 +1,17 @@
 package com.vkannuri.security.app.configuration;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /** @author Venu Kannuri . */
 @EnableWebSecurity
@@ -21,5 +29,25 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .authenticated()
         .and()
         .httpBasic();
+  }
+
+  //Never Recommended for Production
+  @Bean
+  @Override
+  public UserDetailsService userDetailsService() {
+    List<UserDetails> userDetails = new ArrayList<>();
+    userDetails.add(
+        User.withDefaultPasswordEncoder()
+            .username("Venu")
+            .password("password")
+            .roles("USER", "ADMIN")
+            .build());
+    userDetails.add(
+        User.withDefaultPasswordEncoder()
+            .username("Kannuri")
+            .password("password")
+            .roles("USER")
+            .build());
+    return new InMemoryUserDetailsManager(userDetails);
   }
 }
