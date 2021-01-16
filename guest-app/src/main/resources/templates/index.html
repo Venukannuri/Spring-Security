@@ -1,0 +1,25 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}" lang="en">
+<head>
+    <title>Home</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <div class="jumbotron main-content">
+        <h1>Welcome to Guest Hotel Admin</h1>
+        <p>A hotel is an establishment that provides paid lodging on a short-term basis. Facilities provided inside a
+            hotel room may range from a modest-quality mattress in a small room to large suites with bigger,
+            higher-quality beds, a dresser, a refrigerator and other kitchen facilities, upholstered chairs, a flat
+            screen television, and en-suite bathrooms</p></div>
+    <div class="container">
+        <h3>What do you want to do?</h3>
+        <ul>
+            <li><a th:href="@{/guests}">View Guests</a></li>
+        </ul>
+    </div>
+</div>GUEST Hotel
+
+</body>
+</html>

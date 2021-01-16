@@ -1,4 +1,4 @@
-package com.vkannuri.security;
+package com.vkannuri.security.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
