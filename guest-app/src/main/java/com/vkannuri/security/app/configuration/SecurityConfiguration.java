@@ -1,7 +1,6 @@
 package com.vkannuri.security.app.configuration;
 
 import com.vkannuri.security.app.auth.GuestUserDetailService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -9,7 +8,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.annotation.Resource;
 
@@ -24,7 +23,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   public DaoAuthenticationProvider daoAuthenticationProvider() {
     DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
     daoAuthenticationProvider.setUserDetailsService(userDetailService);
-    daoAuthenticationProvider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
+    /**
+     * for BCryptPasswordEncoder to convert simple text to BCryptPasswordEncoder use url
+     * https://bcrypt-generator.com/
+     */
+    daoAuthenticationProvider.setPasswordEncoder(new BCryptPasswordEncoder(11));
     return daoAuthenticationProvider;
   }
 

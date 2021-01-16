@@ -1,4 +1,4 @@
 INSERT INTO USER (USER_NAME, PASSWORD)
-VALUES ('Venu', 'password');
+VALUES ('Venu', '$2y$11$B4gOVQJ/yBMTaZvfKpkyoeyr2Hjk1892jbjdMXvPEJgmA2evlHCoC');
 INSERT INTO USER (USER_NAME, PASSWORD)
-VALUES ('Kannuri', 'password');
+VALUES ('Kannuri', '$2y$11$B4gOVQJ/yBMTaZvfKpkyoeyr2Hjk1892jbjdMXvPEJgmA2evlHCoC');
