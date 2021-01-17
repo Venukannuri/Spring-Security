@@ -37,8 +37,18 @@ public class GuestAppController {
     }
 
     @RequestMapping("/login")
-    public String login() {
+    public String getLoginPage(Model model) {
         return "login";
+    }
+
+    @RequestMapping("/logout")
+    public String getLogOutPage(Model model) {
+        return "logout";
+    }
+
+    @GetMapping(value = "/logout-success")
+    public String getLogoutPage(Model model) {
+        return "logout";
     }
 
     @GetMapping(value = "/guests")

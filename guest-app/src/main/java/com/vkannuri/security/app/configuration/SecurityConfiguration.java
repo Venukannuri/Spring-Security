@@ -13,8 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
 import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import javax.annotation.Resource;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /** @author Venu Kannuri . */
 @EnableWebSecurity
@@ -22,8 +21,7 @@ import javax.annotation.Resource;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private GuestUserDetailService userDetailService;
+    @Autowired private GuestUserDetailService userDetailService;
 
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
@@ -61,28 +59,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .anyRequest()
                 .authenticated()
                 .and()
-                .httpBasic();
+                .formLogin()
+                .loginPage("/login")
+                .permitAll()
+                .and()
+                .logout()
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/logout-success")
+                .permitAll();
     }
-
-    // Never Recommended for Production
-    /*@Bean
-    @Override
-    public UserDetailsService userDetailsService() {
-      List<UserDetails> userDetails = new ArrayList<>();
-      userDetails.add(
-          User.withDefaultPasswordEncoder()
-              .username("Venu")
-              .password("password")
-              .roles("USER", "ADMIN")
-              .build());
-      userDetails.add(
-          User.withDefaultPasswordEncoder()
-              .username("Kannuri")
-              .password("password")
-              .roles("USER")
-              .build());
-      return new InMemoryUserDetailsManager(userDetails);
-    }
-
-     */
 }
